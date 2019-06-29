@@ -23,6 +23,9 @@ class ListContacts extends Component{
         this.setState({query:''})
     }
 
+    
+          
+
     render(){ 
 
         let showingContacts
@@ -35,15 +38,16 @@ class ListContacts extends Component{
         else
          {
           showingContacts=this.props.contacts
-        }
-                     
+        }           
     
         return (
             
 
-            <div className='list-contacts'>
+        <div className='list-contacts'>
+
+
                 
-              <div className='list-contacts-top'>
+            <div className='list-contacts-top'>
                     <input
                         className="search-contacts"
                         type='text'
@@ -51,18 +55,23 @@ class ListContacts extends Component{
                         value={this.state.query}
                         onChange={(event)=>this.updateQuery(event.target.value)}
                     >
-                        </input>
+                    </input>
                 
 
-                <a
-                 href="#create"
-                 onClick={this.props.onNavigate}
-                 className="add-contact"
-                >
-                        Add Contact
-                </a>
+                    <a
+                    href="#create"
+                    onClick={this.props.onNavigate}
+                    className="add-contact"
+                    >
+                            Add Contact
+                    </a>
 
-                </div>  
+
+            </div> 
+
+
+
+
                 {showingContacts.length !== this.props.contacts.length &&(
                     <div className='showing-contacts'>
                         <span>
@@ -74,29 +83,30 @@ class ListContacts extends Component{
                             
                     </div>
                 )}
+
             
 
-            <ol className="contact-list">
+                <ol className="contact-list">
 
-                {showingContacts.map((contact) => 
-                <li key={contact.id} className='contact-list-item'>
-                    <div className='contact-avatar' style={{
-                        backgroundImage:"url(" +contact.avatarURL+ ")"
-                     } }>
-                    </div>
-                    <div className='contact-details'>
-                        <p>{contact.name}</p>
-                        <p>{contact.email}</p>
+                    {showingContacts.map((contact) => 
+                    <li key={contact.id} className='contact-list-item'>
+                        <div className='contact-avatar' style={{
+                            backgroundImage:"url(" +contact.avatarURL+ ")"
+                        } }>
+                        </div>
+                        <div className='contact-details'>
+                            <p>{contact.name}</p>
+                            <p>{contact.email}</p>
 
-                    </div>
-                    <button onClick={()=>this.props.onDeleteContact(contact)} className='contact-remove'>
-                        Remove
-                    </button>
+                        </div>
+                        <button onClick={()=>this.props.onDeleteContact(contact)} className='contact-remove'>
+                            Remove
+                        </button>
 
 
-                </li>
-                 ) }
-            </ol>
+                    </li>
+                    ) }
+                </ol>
         </div>
         )
     }
