@@ -6,27 +6,36 @@ import escapeRegExp from 'escape-string-regexp'
 
 
 class ListContacts extends Component{
-static propTypes={
-        contacts:PropTypes.array.isRequired,
-        onDeleteContact:PropTypes.func.isRequired
-}
 
-state={
-    query: ''
-}
-updateQuery=(query)=>{
-    this.setState({query:query.trim() })
-}
+    static propTypes={
+            contacts:PropTypes.array.isRequired,
+            onDeleteContact:PropTypes.func.isRequired
+    }
 
-    render(){   
+    state={
+        query: ''
+    }
+    updateQuery=(query)=>{
+        this.setState({query:query.trim() })
+    }
+
+    clearQuery=()=>{
+        this.setState({query:''})
+    }
+
+    render(){ 
+
         let showingContacts
-        if (this.state.query){
+
+        if (this.state.query)
+        {
             const match = new RegExp(escapeRegExp(this.state.query),'i')
-            showingContacts=this.props.contacts.filter((contact)=>match.test(contact.name)
-                     ) }        
-                else {
+            showingContacts=this.props.contacts.filter((contact)=>match.test(contact.name)) 
+        }        
+        else
+         {
           showingContacts=this.props.contacts
-                     }
+        }
                      
     
         return (
@@ -45,9 +54,21 @@ updateQuery=(query)=>{
                         </input>
 
                 </div>  
+                {showingContacts.length !== this.props.contacts.length &&(
+                    <div className='showing-contacts'>
+                        <span>
+                            Now showing {showingContacts.length} of {this.props.contacts.length}.
+                            <button  onClick={this.clearQuery}>
+                                Show all
+                            </button>
+                        </span>
+                            
+                    </div>
+                )}
             
 
-             <ol className="contact-list">
+            <ol className="contact-list">
+
                 {showingContacts.map((contact) => 
                 <li key={contact.id} className='contact-list-item'>
                     <div className='contact-avatar' style={{
