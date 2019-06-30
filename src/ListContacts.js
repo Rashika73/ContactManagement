@@ -1,6 +1,7 @@
-import React ,{Component} from 'react'
-import PropTypes from 'prop-types'
-import escapeRegExp from 'escape-string-regexp'
+import React ,{Component} from 'react';
+import PropTypes from 'prop-types';
+import { Link } from'react-router-dom';
+import escapeRegExp from 'escape-string-regexp';
 
 
 
@@ -57,7 +58,7 @@ class ListContacts extends Component{
                     >
                     </input>
                 
-
+{/**    now adding link routing
                     <a
                     href="#create"
                     onClick={this.props.onNavigate}
@@ -65,6 +66,15 @@ class ListContacts extends Component{
                     >
                             Add Contact
                     </a>
+**/}
+
+                    <Link
+                    to="/create"
+                    
+                    className="add-contact"
+                    >
+                            Add Contact
+                    </Link>
 
 
             </div> 
